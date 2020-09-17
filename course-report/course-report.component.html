@@ -1,0 +1,99 @@
+<div class="container">  
+    <div >
+        <p><b><h2>Welcome to Course Report Page</h2></b></p> 
+    </div>
+
+    <div class="row">
+      <div class="col-md-2" >
+       <ul class="nav flex-column" style="background-color: darkblue;">
+        <li class="nav-item">
+          <a style="color: black;font-weight: bold;text-decoration: underline;">View:-</a>
+        </li>
+        <li class="nav-item">
+           
+               <a class="nav-link active" (click)="onCourseClick()" style="font-style: italic;"> 
+                All Course Reports</a>
+                
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link active"  (click)="onCompletedCourseClick()" style="font-style: italic;">
+                Completed Courses</a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link active" (click)="onInProgressCourseClick()"  style="font-style: italic;">
+                InProgress Courses</a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link active" (click)="onYetToStartCourseClick()"  style="font-style: italic;">
+                Yet To Start Courses</a>
+        </li>
+    </ul>
+    </div>
+
+    <div class="col-md-10">
+    
+        <div table-responsive *ngIf="dataFound,else noData">
+        
+     <table class="table table-bordered " id="convert">
+        
+        <thead>
+            <tr>
+              <th>Training Id</th>
+              <th>Course Id</th>
+              <th>Course Name</th>
+              <th>Learner Name</th>
+              <th>learner id</th>
+              <th>Mentor Name</th>
+              <th>Mentor Id</th>
+              <th>Course Status</th>
+            </tr>
+          </thead>
+
+        <tbody>
+          <tr  *ngFor="let t of trainingsRef">
+            <!-- <th scope="row">{{.id}}</th> -->
+            <td>{{t.trainings_id}}</td>
+            <td><b>{{t.course_id}}</b></td>
+            <td>{{t.course_nm}}</td>
+            <td>{{t.lrnr_nm}}</td>
+            <td><b>{{t.lrnr_user_id}}</b></td>
+            <td>{{t.mntr_nm}}</td>
+            <td><b>{{t.mntr_user_id}}</b></td>
+            <td><b>{{t.status}}</b></td>
+            
+          </tr>
+         
+        </tbody>
+      </table>
+   
+
+    <!-- <input type="button" value="Convert to pdf " (click)="convetToPDF()"/> -->
+    <form>
+      <select id="selectid" class="form-control-mb-12"  (click)="onSelected($event.target.value)">
+          <option value="saveAs">saveAs</option>
+          <option value="pdf">PDF</option>
+          <option value="excel">Excel</option>
+         
+       </select>
+       <button type="button" class="btn btn-success btn-xs" style="margin-left: 10px;" (click)="onDownload()">Download</button>
+      
+</form>
+    </div> 
+<!-- else block -->
+    <ng-template #noData>
+        <div>  <h2 style="color: red;">No Record Found</h2></div>
+
+       </ng-template>
+
+       <div *ngIf="errorStatus">
+        <h2 style="color: red;">invalid request</h2>
+        
+      </div>
+
+      </div>
+    </div>
+    
+</div>
